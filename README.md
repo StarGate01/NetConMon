@@ -1,11 +1,11 @@
 # NetConMon - Network Connectivity Monitoring Service
-Windows network connectivity monitor service
-
 Logs network timeout and re-availability to the windows eventlog
 
-Use it to monitor and debug your network problems
+Default: Ping 8.8.8.8 every 5s with 500ms timeout
 
-Maybe in a future update: GUI
+Use it to monitor and debug your network problems.
+
+Maybe in a future update: GUI!
 
 ## Installation
 ```installutil.exe NetConMon.exe```
