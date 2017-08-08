@@ -1,0 +1,78 @@
+﻿<Window x:Class="NetConMonGui.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NetConMonGui"
+        xmlns:DV="clr-namespace:System.Windows.Controls.DataVisualization;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+        xmlns:DVC="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+        mc:Ignorable="d"
+        Title="Network connection monitor GUI" Height="350" Width="525" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
+            <Menu DockPanel.Dock="Top" Padding="3">
+                <MenuItem Header="Application">
+                    <MenuItem x:Name="ReloadMenuButton" Header="Relead" Click="ReloadMenuButton_Click">
+                        <MenuItem.Icon>
+                            <Image Source="Assets/Restart_16x.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem x:Name="SettingsMenuButton" Header="Settings" Click="SettingsMenuButton_Click">
+                        <MenuItem.Icon>
+                            <Image Source="Assets/Settings_16x.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem x:Name="ExitMenuButton" Header="Exit" Click="ExitMenuButton_Click" >
+                        <MenuItem.Icon>
+                            <Image Source="Assets/Exit_16x.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="Service">
+                    <MenuItem x:Name="RestartServiceMenuButton" Header="Restart" Click="RestartServiceMenuButton_Click">
+                        <MenuItem.Icon>
+                            <Image Source="Assets/Restart_16x.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem x:Name="StopServiceMenuButton" Header="Stop" Click="StopServiceMenuButton_Click">
+                        <MenuItem.Icon>
+                            <Image Source="Assets/Stop_16x.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+
+        <Border BorderThickness="0 1 0 0" Grid.Row="1" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" >
+            <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
+                <DVC:Chart x:Name="chartTimeout" >
+                    <DVC:Chart.LegendStyle>
+                        <Style TargetType="{x:Type DV:Legend}">
+                            <Setter Property="Width" Value="0" />
+                        </Style>
+                    </DVC:Chart.LegendStyle>
+
+                    <DVC:Chart.Series>
+                        <DVC:LineSeries Title="Timeout"
+            IndependentValueBinding="{Binding Path=Key}"
+            DependentValueBinding="{Binding Path=Value}">
+                        </DVC:LineSeries>
+                    </DVC:Chart.Series>
+                </DVC:Chart>
+            </ScrollViewer>
+        </Border>
+        
+
+        <Border BorderThickness="0 1 0 0" Grid.Row="3" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+            <WrapPanel Margin="4">
+                <TextBlock Text="NetConMon service is " />
+                <TextBlock x:Name="ServiceStatusTextBlock" Text="probing status" />
+            </WrapPanel>
+        </Border>
+    </Grid>
+</Window>
